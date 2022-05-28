@@ -1,0 +1,106 @@
+{% extends 'vacancies/dashboard_base.html' %}
+{% load  static %}
+
+
+{% block breadcrumbs%}
+    <ol>
+        <li><h5><a href="{% url 'vacancies:dashboard' %}"><i class="bi bi-speedometer2"></i></a></h5></li>
+        <li>Сообщения</li>
+    </ol>
+    <h2>Сообщения  <i class="bi bi-envelope"></i></h2>
+{% endblock %}
+
+
+{% block content%}
+
+{% if messages_list %} 
+
+{% comment %} <h4>Сообщений: {{ messages_list|length }}</h4>  {% endcomment %}
+<h4>Сообщений: {{ num_of_all_messages }}</h4>
+<br/><br/>
+    
+        {% for message in messages_list %}
+
+            <article class="entry">              
+                
+                    <h5>
+                        {{ message.name }}
+                    </h5>
+                
+                    <div class="entry-meta">
+                        <ul>                  
+                            <li class="d-flex align-items-center"><i class="bi bi-envelope"></i><a href="mailto:{{ message.email }}">{{ message.email }}</a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i><a><time datetime="2020-01-01">{{ message.date }}</time></a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-upc"></i><a>id: #{{ message.id }}</a></li>
+                        </ul>
+                    </div>
+
+                    <h4>
+                        <a>{{ message.subject }}</a>              
+                    </h4>
+
+                    <div class="entry-content">
+                        <p>                
+                        {{ message.message }}            
+                        </p>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">                  
+                        <a class="btn btn-danger" href="{% url 'vacancies:message_delete' message.pk %}" role="button">Удалить</a> 
+                    </div>  
+
+            </article><!-- End blog entry -->
+
+        {% endfor %}
+        
+        
+
+{% else %}
+
+    <h4>Пока нет сообщений, зайдите позже.</h4>
+
+{% endif %}
+
+{% endblock %}
+
+
+{% block pagination %}
+
+  {% if is_paginated %}
+
+    <div class="blog-pagination">
+      <ul class="justify-content-center">
+        {% if page_obj.has_previous %}
+          <li><a href="?page=1&{{ get_copy.urlencode }}"><i class="bi bi-chevron-double-left"></i></a></li>
+          <li><a href="?page={{ page_obj.previous_page_number }}&{{ get_copy.urlencode }}"><i class="bi bi-chevron-left"></i></a></li>
+        {% endif %}
+
+        <!-- Показываем только текущую страницу и ближайшие к ней, чтобы список не тянулся и не захламлял страницу -->
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+              <li class="active"><a href="#">{{ num }}</a></li>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <li><a href="?page={{ num }}&{{ get_copy.urlencode }}">{{ num }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        <!-- Если есть следующая страница, то даём ссылку на неё и на самую последнюю страницу -->
+        {% if page_obj.has_next %}
+          <li><a href="?page={{ page_obj.next_page_number }}&{{ get_copy.urlencode }}"><i class="bi bi-chevron-right"></i></a></li>
+          <li><a href="?page={{ page_obj.paginator.num_pages }}&{{ get_copy.urlencode }}"><i class="bi bi-chevron-double-right"></i></a></li>
+        {% endif %}
+      </ul>
+    </div>
+    
+  {% endif %}
+{% endblock %}
+
+
+{% include 'vacancies/dashboard_sidebar.html' %}
+
+{% comment %} <li>            
+            
+    <!-- The best template code. 
+    <a href="{{ vacancy.get_absolute_url }}">{{ vacancy.title }}</a>  -->
+
+</li> {% endcomment %}

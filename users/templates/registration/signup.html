@@ -1,0 +1,95 @@
+{% extends 'registration/user_base.html' %}
+{% load  static %}
+
+{% block title %}Welcome | {% endblock %}
+
+{% block breadcrumbs%}
+    <ol>
+        <li><h5><a href="{% url 'vacancies:dashboard' %}"><i class="bi bi-speedometer2"></i></a></h5></li>
+        <li><a href="{% url 'users:signup' %}">SignUp</a></li>
+    </ol>
+    <h2>SignUp</h2>
+{% endblock %}
+
+
+{% block content %}
+
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <div class="d-flex justify-content-center py-4">
+                <a href="" class="logo d-flex align-items-center w-auto">
+                  {% comment %} <img src="{% static 'assets/img/logo.png' %}" alt=""> {% endcomment %}
+                  <span class="d-none d-lg-block">Welcome to RNG Dashboard</span>
+                </a>
+              </div><!-- End Logo -->
+
+              <div class="card mb-3">
+
+                <div class="card-body">
+
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                    <p class="text-center small">Enter your personal details to create account</p>
+                  </div>
+                  
+                  <form method="post" action="" class="row g-3">                    
+                    {% csrf_token %} 
+                    
+                    <div class="col-12">
+                      {% comment %} <label for="yourUsername" class="form-label">Username</label> {% endcomment %}
+                      <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person"></i></span>
+                          {{ form.username }}                        
+                      </div>
+                    </div>
+                    
+                    <div class="col-12">
+                      {% comment %} <label for="yourEmail" class="form-label">Your Email</label> {% endcomment %}
+                      <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-envelope"></i></span>
+                        {{ form.email }}     
+                      </div>               
+                    </div>     
+            
+                    <div class="col-12">
+                      {% comment %} <label for="yourPassword" class="form-label">Password</label> {% endcomment %}
+                      <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-lock"></i></span>
+                        {{ form.password1 }}                        
+                      </div> 
+                    </div>
+  
+                    <div class="col-12">
+                      {% comment %} <label for="yourPassword2" class="form-label">Repeat password</label> {% endcomment %}
+                      <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-lock"></i></span>
+                        {{ form.password2 }}                      
+                      </div>
+                    </div> 
+
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %} 
+                                <div>
+                                    <p class="text-danger">{{ error|escape }}</p>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <div class="col-12">
+                      <button class="btn btn-danger w-100" type="submit">Create Account</button>
+                    </div>
+                    <div class="col-12">
+                      <p class="small mb-0">Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+                    </div>
+
+                  </form>
+                  
+                </div>
+              </div>              
+            </div>
+          </div>        
+
+{% endblock %}

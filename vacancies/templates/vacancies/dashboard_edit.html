@@ -1,0 +1,56 @@
+{% extends 'vacancies/dashboard_base.html' %}
+{% load  static %}
+
+{% block breadcrumbs%}
+    <ol>
+        <li><h5><a href="{% url 'vacancies:dashboard' %}"><i class="bi bi-speedometer2"></i></a></h5></li>
+        <li><a href="{% url 'vacancies:dashboard' %}">Вакансии</a></li>
+        <li>Создание / Редактирование Вакансии</li>
+    </ol>
+    <h2>Создание / Редактирование Вакансии</h2>
+{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+
+    <article class="entry entry-single">
+
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <div class="entry-content">
+                <div class="read-more">
+                    <button type="submit" class="save btn btn-secondary">Сохранить</button>                    
+                </div>
+            </div>            
+        </form>
+
+        
+  
+    </article><!-- End blog entry -->
+  
+    <div class="blog-author d-flex align-items-center">
+    <img src="{% static 'website/assets/img/my_photo.jpg' %}" class="rounded-circle float-left" alt="">
+    <div>
+        <h4>Михаил Рямов</h4>
+        <div class="social-links">
+        <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+        <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+        <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+        </div>
+        <p>
+        Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas.
+        </p>
+    </div>
+    </div><!-- End blog author bio -->
+
+{% else %}
+
+    You're not allowed here! (and you know it ...)
+
+{% endif %}
+
+
+{% endblock %}

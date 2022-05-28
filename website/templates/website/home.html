@@ -1,0 +1,131 @@
+{% extends 'website/base.html' %}
+{% load  static %}
+
+{% block content %}
+
+
+    <!-- ======= Vacancies Section ======= -->
+    <section id="vacancies" class="pricing">
+        <div class="container blog">
+  
+          <div class="section-title">
+            <h2><a href="{% url 'vacancies:vacancies_list' %}">Вакансии</a></h2>
+            <h3>Наши <span><a href="{% url 'vacancies:vacancies_list' %}">Вакансии</a></span></h3>
+            <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>           
+          </div>
+  
+          <div class="row">
+
+            {% if topVacancies_list %}
+
+                {% for vacancy in topVacancies_list %}                    
+                    
+                    <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                        <div class="box entry">              
+                            
+                            <h2 class="entry-title">
+                                <a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.title }}</a>
+                            </h2>
+
+                          
+                                <ul class="entry-meta">
+                                    <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i><a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.location }}</a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-coin"></i><a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.salary }}</a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i><a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}"><time datetime="2020-01-01">{{ vacancy.date_published|date:"M d, Y" }}</time></a></li>                
+                                </ul>
+                         
+                            
+                            <div class="text-start">
+                                <p>                
+                                  {{ vacancy.entryСontent|safe|truncatechars:350 }}            
+                                </p>                                
+                            </div>
+
+                            <div class="btn-wrap">
+                                <a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}" class="btn-buy">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}    
+
+            {% else %}
+  
+                <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                <div class="box">              
+                    <h2>Senior Frontend Developer</h2>
+                    <p>$4000 - $6000<span> / month</span></p>
+                    <ul>
+                        <li>Remote</li>
+                        <li>Full time</li> 
+                    </ul>
+                    <h5>Stack:</h5>                             
+                    <p>
+                        JavaScript (ES5, ES6), TypeScript, React.js (Redux, Flux), 
+                        CSS/HTML, SASS/SCSS, 
+                        Webpack, Gulp, Jest or similar                     
+                    </p>  
+                    <div class="btn-wrap">
+                        <a href="#" class="btn-buy">Подробнее</a>
+                    </div>
+                </div>
+                </div>
+    
+                <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                <div class="box">              
+                    <h2>Senior Frontend Developer</h2>
+                    <p>$4000 - $6000<span> / month</span></p>
+                    <ul>
+                        <li>Remote</li>
+                        <li>Full time</li> 
+                    </ul>
+                    <h5>Stack:</h5>                             
+                    <p>
+                        JavaScript (ES5, ES6), TypeScript, React.js (Redux, Flux), 
+                        CSS/HTML, SASS/SCSS, 
+                        Webpack, Gulp, Jest or similar                     
+                    </p>  
+                    <div class="btn-wrap">
+                        <a href="#" class="btn-buy">Подробнее</a>
+                    </div>
+                </div>
+                </div>
+    
+                <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+                <div class="box">              
+                    <h2>Senior Frontend Developer</h2>
+                    <p>$4000 - $6000<span> / month</span></p>
+                    <ul>
+                        <li>Remote</li>
+                        <li>Full time</li> 
+                    </ul>
+                    <h5>Stack:</h5>                             
+                    <p>
+                        JavaScript (ES5, ES6), TypeScript, React.js (Redux, Flux), 
+                        CSS/HTML, SASS/SCSS, 
+                        Webpack, Gulp, Jest or similar                     
+                    </p>  
+                    <div class="btn-wrap">
+                        <a href="#" class="btn-buy">Подробнее</a>
+                    </div>
+                </div>
+                </div>
+            {% endif %}
+ 
+          </div>
+          <br/>
+          <div class="section-title">            
+              <div class="btn-wrap">
+                <h4><a href="{% url 'vacancies:vacancies_list' %}">Больше вакансий ...</a></h4>            
+              </div>   
+          </div>        
+  
+        </div>
+      </section><!-- End Vacancies Section -->
+
+    
+{% endblock %}
+    
+
+
+

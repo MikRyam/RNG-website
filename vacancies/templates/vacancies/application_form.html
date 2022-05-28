@@ -1,0 +1,177 @@
+{% extends 'vacancies/vacancies_base.html' %}
+{% load  static %}
+
+
+{% block breadcrumbs%}
+<ol>
+    <li><h5><a href="{% url 'website:home' %}#hero"><i class="bi bi-house-door"></i></a></h5></li>
+    <li><a href="{% url 'vacancies:vacancies_list' %}">Вакансии</a></li>
+    <li>Вакансия</li>
+</ol>
+<h2>Вакансия</h2>
+{% endblock %}
+
+
+{% block content %}
+
+<article class="entry entry-single">
+
+    <div class="entry-img">
+      <img src="{% static vacancy.get_image %}" alt="" class="img-fluid">
+    </div>
+
+    <h2 class="entry-title">
+      <a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.title }}</a>
+    </h2>
+
+    <div class="entry-meta">
+      <ul>
+          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i> <a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.location }}</a></li>
+          <li class="d-flex align-items-center"><i class="bi bi-coin"></i> <a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.salary }}</a></li>
+          <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}"><time datetime="2020-01-01">{{ vacancy.date_published|date:"M d, Y" }}</time></a></li>
+      </ul>
+    </div>
+
+    <div class="entry-content">
+      <p>{{ vacancy.entryСontent|safe }}</p>
+      <br/>
+      <p>{{ vacancy.body|safe }}</p>        
+    </div>
+
+    <div class="entry-footer">
+      <i class="bi bi-folder"></i>
+      <ul class="cats">
+        <li><a href="#">Business</a></li>
+      </ul>
+
+      <i class="bi bi-tags"></i>
+      <ul class="tags">
+        <li><a href="#">Creative</a></li>
+        <li><a href="#">Tips</a></li>
+        <li><a href="#">Marketing</a></li>
+      </ul>
+    </div>
+
+</article><!-- End blog entry {% static 'website/assets/img/my_photo.jpg' %}-->
+
+  {% if vacancy.contacts %}
+    <div class="blog-author d-flex align-items-center">
+      <img src="{{ vacancy.author.profile.profile_image.url }}" class="rounded-circle float-left" alt="">
+      <div>
+        <h4>{{ vacancy.author.get_full_name }}</h4>
+        {% comment %} <h4>Михаил Рямов</h4> {% endcomment %}
+        <p>{{ vacancy.author.profile.position }}</p>
+        <div class="social-links">
+          <a href="https://t.me/MikhailRyam"><i class="bi bi-telegram"></i></a>
+          <a href="mailto:mr@rng-services.com"><i class="bi bi-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/mikhail-ryamov/" target="_blank"><i class="bx bxl-linkedin"></i></a>
+        </div>
+        <p>
+          {{ vacancy.author.profile.bio }}
+          {% comment %} Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas. {% endcomment %}
+        </p>
+      </div>
+    </div><!-- End blog author bio -->
+  {% endif %}
+
+</article>
+
+<div class="blog-comments">
+
+    <div class="reply-form">
+      {% comment %} <h4>Apply for job</h4>
+      <p>Your email address will not be published. Required fields are marked * </p> {% endcomment %}
+
+      
+
+      <h4>Откликнуться на вакансию</h4>
+      <p>Обязательные поля отмечены * </p>
+      {% comment %} <p>Your email address will not be published. Required fields are marked * </p> {% endcomment %}
+
+      {% comment %} <form method="POST" class="post-form">{% csrf_token %}
+        {{ application_form.media }}
+        {{ application_form.as_p }}
+        <div class="entry-content">
+            <div class="read-more">
+                <button type="submit" class="save btn btn-secondary">Сохранить</button>                    
+            </div>
+        </div>            
+      </form> {% endcomment %}
+
+      {% comment %} <br/><br/> {% endcomment %}
+
+      <form action="" method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+        {{ application_form.media }}            
+        <div class="row">
+          <div class="col-md-6 form-group">
+            {% comment %} <input name="first_name" type="text" class="form-control" placeholder="Имя*"> {% endcomment %}
+            {{ application_form.first_name }}
+          </div>
+          <div class="col-md-6 form-group">
+            {% comment %} <input name="last_name" type="text" class="form-control" placeholder="Фамилия*"> {% endcomment %}
+            {{ application_form.last_name }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            {% comment %} <input name="email" type="text" class="form-control" placeholder="Your Email*"> {% endcomment %}
+            {{ application_form.email }}                
+          </div>
+          <div class="col-md-6 form-group">
+            {% comment %} <input name="phone" type="text" class="form-control" placeholder="Your Name*"> {% endcomment %}
+            {{ application_form.phone }}                 
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            {% comment %} <input name="first_name" type="text" class="form-control" placeholder="Имя*"> {% endcomment %}
+            {{ application_form.telegram_url }}
+          </div>
+          <div class="col-md-6 form-group">
+            {% comment %} <input name="last_name" type="text" class="form-control" placeholder="Фамилия*"> {% endcomment %}
+            {{ application_form.whatsapp_url }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            {% comment %} <input name="first_name" type="text" class="form-control" placeholder="Имя*"> {% endcomment %}
+            {{ application_form.linkedin_url }}
+          </div>
+          <div class="col-md-6 form-group">
+            {% comment %} <input name="last_name" type="text" class="form-control" placeholder="Фамилия*"> {% endcomment %}
+            {{ application_form.github_url }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col form-group">
+            <p>Загрузить резюме (txt, doc, docx, pdf)*</p>
+            <input name="resume" type="file" accept=".txt, .doc, .docx, .pdf" verbose_name="Загрузить резюме*" help_text="Загрузить резюме в формате txt, doc, docx, pdf">
+            {% comment %} {{ application_form.resume }} {% endcomment %}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col form-group">
+            {% comment %} <input name="website" type="text" class="form-control" placeholder="Your Website"> {% endcomment %}
+            {{ application_form.cover_letter }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col form-group">
+            {% comment %} <input name="website" type="text" class="form-control" placeholder="Your Website"> {% endcomment %}
+            {{ application_form.salary }}
+          </div>
+        </div>            
+        <button type="submit" class="btn btn-primary">Отправить</button>
+      </form>
+
+    </div>
+
+</div><!-- End blog comments -->
+
+{% endblock %}
+
+{% block sidebar %}
+
+  {% include 'vacancies/vacancies_list_sidebar.html' %}
+
+{% endblock %}

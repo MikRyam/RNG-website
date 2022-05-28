@@ -1,0 +1,85 @@
+{% extends 'vacancies/vacancies_base.html' %}
+{% load  static %}
+
+
+{% block breadcrumbs%}
+    <ol>
+        <li><h5><a href="{% url 'website:home' %}#hero"><i class="bi bi-house-door"></i></a></h5></li>
+        <li><a href="{% url 'vacancies:vacancies_list' %}">Вакансии</a></li>
+        <li>Вакансия</li>
+    </ol>
+    <h2>Вакансия</h2>
+{% endblock %}
+
+
+{% block content %}
+        
+    <article class="entry entry-single">
+
+      <div class="entry-img">
+        <img src="{% static vacancy.get_image %}" alt="" class="img-fluid">
+      </div>
+
+      <h2 class="entry-title">
+        <a href="{{ vacancy.get_absolute_url }}">{{ vacancy.title }}</a>
+      </h2>
+
+      <div class="entry-meta">
+        <ul>
+            <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i> <a href="{{ vacancy.get_absolute_url }}">{{ vacancy.location }}</a></li>
+            <li class="d-flex align-items-center"><i class="bi bi-coin"></i> <a href="{{ vacancy.get_absolute_url }}">{{ vacancy.salary }}</a></li>
+            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ vacancy.get_absolute_url }}"><time datetime="2020-01-01">{{ vacancy.date_published|date:"M d, Y" }}</time></a></li>
+        </ul>
+      </div>
+
+      <div class="entry-content">
+        <p>{{ vacancy.entryСontent|safe }}</p>
+        <br/>
+        <p>{{ vacancy.body|safe }}</p>        
+      </div>
+
+      <div class="entry-footer">
+        <i class="bi bi-folder"></i>
+        <ul class="cats">
+          <li><a href="#">Business</a></li>
+        </ul>
+
+        <i class="bi bi-tags"></i>
+        <ul class="tags">
+          <li><a href="#">Creative</a></li>
+          <li><a href="#">Tips</a></li>
+          <li><a href="#">Marketing</a></li>
+        </ul>
+      </div>
+
+    </article><!-- End blog entry -->
+
+  {% if vacancy.contacts %}
+    <div class="blog-author d-flex align-items-center">
+      <img src="{% static 'website/assets/img/my_photo.jpg' %}" class="rounded-circle float-left" alt="">
+      <div>
+        <h4>Михаил Рямов</h4>
+        <div class="social-links">
+          <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+          <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+          <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+        </div>
+        <p>
+          Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas.
+        </p>
+      </div>
+    </div><!-- End blog author bio -->
+
+    <br/>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+      <a class="btn btn-danger" href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">ОТКЛИКНУТЬСЯ НА ВАКАНСИЮ</a>
+    </div>
+  {% endif %}
+    
+{% endblock %}
+
+{% block sidebar %}
+
+  {% include 'vacancies/vacancies_list_sidebar.html' %}
+
+{% endblock %}

@@ -1,0 +1,282 @@
+{% load static %}
+
+<main id="main" class="main">
+    <section class="section profile">
+        <div class="row">
+          <div class="col-xl-4">
+  
+            <div class="card">
+              
+              <div class="card-body profile-card profile-author pt-4 d-flex flex-column align-items-center">
+  
+                <img src="{{ user.profile.profile_image.url }}" class="rounded-circle" alt="Profile">
+                <h5>{{ user.username }}</h5>
+                {% if user.first_name %} 
+                  <h4>{{ user.get_full_name }}</h4>
+                {% endif %}
+                {% if user.profile.position %} 
+                  <p>{{ user.profile.position }}</p>
+                {% endif %}
+                {% comment %} <h3>Web Designer</h3> {% endcomment %}
+                
+              </div>
+            </div>
+  
+          </div>
+  
+          <div class="col-xl-8">
+  
+            <div class="card">
+              <div class="card-body pt-3">
+                <!-- Bordered Tabs -->
+                <ul class="nav nav-tabs nav-tabs-bordered">
+  
+                  <li class="nav-item">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                  </li>
+  
+                  <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                  </li>
+  
+                  <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                  </li>
+  
+                </ul>
+                <div class="tab-content pt-2">
+  
+                  <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                    <h4 class="profile-author">About</h4>
+                    <p class="fst-italic">{{ user.profile.bio }}</p>
+                      
+                    <h4 class="profile-author">Profile Details</h4>
+  
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label ">Username</div>
+                      <div class="col-lg-9 col-md-8">{{ user.username }}</div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Email</div>
+                      <div class="col-lg-9 col-md-8">{{ user.email }}</div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">LinkedIn</div>
+                      <div class="col-lg-9 col-md-8">{{ user.profile.linkedin_url }}</div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Facebook</div>
+                      <div class="col-lg-9 col-md-8">{{ user.profile.facebook_url }}</div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Whatsapp</div>
+                      <div class="col-lg-9 col-md-8">{{ user.profile.whatsapp_url }}</div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Telegram</div>
+                      <div class="col-lg-9 col-md-8">{{ user.profile.telegram_url }}</div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Twitter</div>
+                      <div class="col-lg-9 col-md-8">{{ user.profile.twitter_url }}</div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Instagram</div>
+                      <div class="col-lg-9 col-md-8">{{ user.profile.instagram_url }}</div>
+                    </div>
+  
+                  </div>
+  
+                  <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+  
+                    <!-- Profile Edit Form -->
+                    
+                    <form method="post" enctype="multipart/form-data">
+                      {% csrf_token %} 
+                      <div class="row mb-3">
+                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                        <div class="col-md-8 col-lg-9">
+                          <img src="{{ user.profile.profile_image.url }}" alt="Profile">
+                          <div class="pt-2">
+                            {% comment %} <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
+                            <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a> {% endcomment %}
+                            {{ profile_form.profile_image }}
+                          </div>
+                        </div>
+                      </div>
+  
+                      <div class="row mb-3">
+                        <label for="username" class="col-md-4 col-lg-3 col-form-label">Userame</label>
+                        <div class="col-md-8 col-lg-9">                          
+                          {{ user_form.username }}
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label for="first_name" class="col-md-4 col-lg-3 col-form-label">First Name</label>
+                        <div class="col-md-8 col-lg-9">
+                          {{ user_form.first_name }}
+                        </div>
+                      </div> 
+
+                      <div class="row mb-3">
+                        <label for="last_name" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+                        <div class="col-md-8 col-lg-9">
+                          {{ user_form.last_name }}
+                        </div>
+                      </div> 
+  
+                      <div class="row mb-3">
+                        <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
+                        <div class="col-md-8 col-lg-9">
+                          {{ profile_form.bio }}
+                        </div>
+                      </div>
+  
+                      <div class="row mb-3">
+                        <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                        <div class="col-md-8 col-lg-9">
+                          {{ user_form.email }}
+                        </div>
+                      </div> 
+
+                      <div class="row mb-3">
+                        <label for="position" class="col-md-4 col-lg-3 col-form-label">Position</label>
+                        <div class="col-md-8 col-lg-9">
+                          {{ profile_form.position }}
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label for="website" class="col-md-4 col-lg-3 col-form-label">LinkedIn</label>
+                        <div class="col-md-8 col-lg-9">
+                          {{ profile_form.linkedin_url }}
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label for="facebook" class="col-md-4 col-lg-3 col-form-label">Facebook</label>
+                        <div class="col-md-8 col-lg-9">
+                          {{ profile_form.facebook_url }}
+                        </div>
+                      </div>
+                      
+                      <div class="row mb-3">
+                        <label for="whatsapp" class="col-md-4 col-lg-3 col-form-label">Whatsapp</label>
+                        <div class="col-md-8 col-lg-9">
+                          {{ profile_form.whatsapp_url }}
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label for="telegram" class="col-md-4 col-lg-3 col-form-label">Telegram</label>
+                        <div class="col-md-8 col-lg-9">
+                          {{ profile_form.telegram_url }}
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label for="twitter" class="col-md-4 col-lg-3 col-form-label">Twitter</label>
+                        <div class="col-md-8 col-lg-9">
+                          {{ profile_form.twitter_url }}
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label for="instagram" class="col-md-4 col-lg-3 col-form-label">Instagram</label>
+                        <div class="col-md-8 col-lg-9">
+                          {{ profile_form.instagram_url }}
+                        </div>
+                      </div>                      
+
+                      {% if user_form.errors %}
+                        <div class="row mb-3">
+                          <label for="Email" class="col-md-4 col-lg-3 col-form-label text-danger"></label>
+                          <div class="col-md-8 col-lg-9">
+                            {% for field in user_form %}
+                              {% for error in field.errors %} 
+                                <div>
+                                    <p class="text-danger">{{ error|escape }}</p>
+                                </div>
+                              {% endfor %}
+                            {% endfor %}
+                          </div>
+                        </div>                        
+                      {% endif %}
+
+                      <br/>
+  
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                      </div>
+                    </form><!-- End Profile Edit Form -->  
+                  </div>
+                  
+  
+                  <div class="tab-pane fade pt-3" id="profile-change-password">
+                    <!-- Change Password Form -->
+                    <form method="post">
+                      {% csrf_token %}
+                        
+                      <div class="row mb-3">
+                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                        <div class="col-md-8 col-lg-9">
+                          {% comment %} <input name="password" type="password" class="form-control" id="currentPassword"> {% endcomment %}
+                          {{ password_form.old_password }}
+                        </div>
+                      </div>
+  
+                      <div class="row mb-3">
+                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                        <div class="col-md-8 col-lg-9">                          
+                          {% comment %} <input name="newpassword" type="password" class="form-control" id="newPassword"> {% endcomment %}
+                          {{ password_form.new_password1 }}                          
+                        </div>
+                      </div>
+  
+                      <div class="row mb-3">
+                        <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                        <div class="col-md-8 col-lg-9">
+                          {% comment %} <input name="renewpassword" type="password" class="form-control" id="renewPassword"> {% endcomment %}
+                          {{ password_form.new_password2 }}
+                        </div>
+                      </div>
+
+                      {% if password_form.errors %}
+                        <div class="row mb-3">
+                          <label for="Email" class="col-md-4 col-lg-3 col-form-label text-danger"></label>
+                          <div class="col-md-8 col-lg-9">
+                            {% for field in password_form %}
+                              {% for error in field.errors %} 
+                                <div>
+                                    <p class="text-danger">{{ error|escape }}</p>
+                                </div>
+                              {% endfor %}
+                            {% endfor %}
+                          </div>
+                        </div>                        
+                      {% endif %}
+  
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                      </div>
+                    </form><!-- End Change Password Form -->
+  
+                  </div>
+  
+                </div><!-- End Bordered Tabs -->
+  
+              </div>
+            </div>
+  
+          </div>
+        </div>
+    </section>
+</main><!-- End #main -->

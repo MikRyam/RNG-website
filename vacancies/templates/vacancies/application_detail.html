@@ -1,0 +1,86 @@
+{% extends 'vacancies/dashboard_base.html' %}
+{% load  static %}
+
+
+{% block breadcrumbs%}
+    <ol>
+        <li><h5><a href="{% url 'vacancies:dashboard' %}"><i class="bi bi-speedometer2"></i></a></h5></li>
+        <li><a href="{% url 'vacancies:applications' %}">Отклики</a></li>
+        <li>Отклик</li>
+    </ol>
+    <h2>Отклик</h2>
+{% endblock %}
+
+
+{% block content %}
+
+
+    <article class="entry entry-single">
+
+        <h5>{{ object.vacancy.title }}</h5>             
+        <hr>
+        <h4>
+            {{ object.first_name }}
+            {{ object.last_name }}
+            {% comment %} {{ object.get_fullName }} {% endcomment %}
+        </h4>
+
+        <div class="entry-meta">
+          <li class="d-flex align-items-center"><i class="bi bi-cash-coin"></i><a>{{ object.salary }}</a></li>
+        </div>
+    
+        <div class="entry-meta">
+            <ul>
+                <li class="d-flex align-items-center"><i class="bi bi-envelope"></i><a href="mailto:{{ object.email }}">{{ object.email }}</a></li>  
+              {% if object.phone %} 
+                <li class="d-flex align-items-center"><i class="bi bi-telephone"></i><a href="tel:{{ object.phone }}">{{ object.phone }}</a></li>
+              {% endif %}
+              {% if object.facebook_url %} 
+                <li class="d-flex align-items-center"><i class="bi bi-facebook"></i><a>{{ object.facebook_url }}</a></li>
+              {% endif %}
+              {% if object.telegram_url %} 
+                <li class="d-flex align-items-center"><i class="bi bi-telegram"></i><a>{{ object.telegram_url }}</a></li>
+              {% endif %}
+              {% if object.whatsapp_url %} 
+                <li class="d-flex align-items-center"><i class="bi bi-whatsapp"></i><a>{{ object.whatsapp_url }}</a></li>
+              {% endif %}
+              {% if object.linkedin_url %} 
+                <li class="d-flex align-items-center"><i class="bi bi-linkedin"></i><a>{{ object.linkedin_url }}</a></li>
+              {% endif %}
+              {% if object.github_url %} 
+                <li class="d-flex align-items-center"><i class="bi bi-github"></i><a>{{ object.github_url }}</a></li>
+              {% endif %}
+                <li class="d-flex align-items-center"><i class="bi bi-clock"></i><a><time datetime="2020-01-01">{{ object.date_added }}</time></a></li>
+            </ul>
+        </div>                   
+
+        <div class="entry-content">
+            <p>                
+            {{ object.cover_letter }}   
+            </p>
+        </div>
+
+        <div class="entry-content">
+            <a href="{{ object.resume.url}}" target="_blank">
+                Резюме
+            </a>
+        </div>   
+
+        <br/><br/>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">            
+            <a class="btn btn-danger" href="{% url 'vacancies:application_delete' object.pk %}" role="button">Удалить</a> 
+        </div>  
+           
+
+    </article><!-- End blog entry -->
+
+    
+    
+
+{% endblock %}
+
+
+
+
+                      

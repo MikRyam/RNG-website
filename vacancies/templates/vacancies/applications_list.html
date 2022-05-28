@@ -1,0 +1,145 @@
+{% extends 'vacancies/dashboard_base.html' %}
+{% load  static %}
+
+
+{% block breadcrumbs%}
+    <ol>
+        <li><h5><a href="{% url 'vacancies:dashboard' %}"><i class="bi bi-speedometer2"></i></a></h5></li>
+        <li>Отклики</li>
+    </ol>
+    <h2>Отклики    <i class="bi bi-file-earmark-person-fill"></i></h2>
+{% endblock %}
+
+
+{% block content%}
+
+{% if applications_list %} 
+
+{% comment %} <h4>Сообщений: {{ messages_list|length }}</h4>  {% endcomment %}
+<h4>Откликов: {{ num_of_all_applications }}</h4>
+<br/><br/>
+    
+    {% for application in applications_list %}
+
+      <article class="entry"> 
+
+          {% comment %} <div class="row">
+            <div class="col-md-11">
+              <h5>{{ application.vacancy.title }}</h5>
+            </div>                
+            <div class="col-6 col-md-1">
+              <h4 class="text-secondary"><i class="bi bi-file-earmark-person-fill"></i></h4>
+            </div>
+          </div>  {% endcomment %}
+          
+          <h5>{{ application.vacancy.title }}</h5> 
+          
+          <hr/>
+      
+          <h4>
+              {{ application.first_name }}
+              {{ application.last_name }}
+              {% comment %} {{ application.get_fullName }} {% endcomment %}
+          </h4>
+          {% if application.salary %} 
+            <div class="entry-meta">
+              <li class="d-flex align-items-center"><i class="bi bi-cash-coin"></i><a >{{ application.salary }}</a></li>
+            </div>
+          {% endif %}
+      
+          <div class="entry-meta">
+              <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-envelope"></i><a href="mailto:{{ application.email }}">{{ application.email }}</a></li>  
+                {% if application.phone %} 
+                  <li class="d-flex align-items-center"><i class="bi bi-telephone"></i><a href="tel:{{ application.phone }}">{{ application.phone }}</a></li>
+                {% endif %}
+                {% if application.facebook_url %} 
+                  <li class="d-flex align-items-center"><i class="bi bi-facebook"></i><a>{{ application.facebook_url }}</a></li>
+                {% endif %}
+                {% if application.telegram_url %} 
+                  <li class="d-flex align-items-center"><i class="bi bi-telegram"></i><a>{{ application.telegram_url }}</a></li>
+                {% endif %}
+                {% if application.whatsapp_url %} 
+                  <li class="d-flex align-items-center"><i class="bi bi-whatsapp"></i><a>{{ application.whatsapp_url }}</a></li>
+                {% endif %}
+                {% if application.linkedin_url %} 
+                  <li class="d-flex align-items-center"><i class="bi bi-linkedin"></i><a>{{ application.linkedin_url }}</a></li>
+                {% endif %}
+                {% if application.github_url %} 
+                  <li class="d-flex align-items-center"><i class="bi bi-github"></i><a>{{ application.github_url }}</a></li>
+                {% endif %}
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i><a><time datetime="2020-01-01">{{ application.date_added }}</time></a></li>
+              </ul>
+          </div>                   
+
+          <div class="entry-content">
+              <p>                
+              {{ application.cover_letter|truncatechars:350 }}            
+              </p>
+          </div>
+          <div class="entry-content">
+            <a href="{{ application.resume.url}}" target="_blank">
+            Резюме
+            </a>
+          </div>
+          <br/>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">                  
+            <a class="btn btn-dark" href="{% url 'vacancies:application_detail' application.pk %}" role="button">Подробнее</a> 
+            <a class="btn btn-danger" href="{% url 'vacancies:application_delete' application.pk %}" role="button">Удалить</a> 
+          </div>  
+                  
+      </article><!-- End blog entry -->
+
+    {% endfor %}
+        
+        
+
+{% else %}
+
+    <h4>Пока нет откликов, зайдите позже.</h4>
+
+{% endif %}
+
+{% endblock %}
+
+
+{% block pagination %}
+
+  {% if is_paginated %}
+
+    <div class="blog-pagination">
+      <ul class="justify-content-center">
+        {% if page_obj.has_previous %}
+          <li><a href="?page=1&{{ get_copy.urlencode }}"><i class="bi bi-chevron-double-left"></i></a></li>
+          <li><a href="?page={{ page_obj.previous_page_number }}&{{ get_copy.urlencode }}"><i class="bi bi-chevron-left"></i></a></li>
+        {% endif %}
+
+        <!-- Показываем только текущую страницу и ближайшие к ней, чтобы список не тянулся и не захламлял страницу -->
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+              <li class="active"><a href="#">{{ num }}</a></li>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <li><a href="?page={{ num }}&{{ get_copy.urlencode }}">{{ num }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        <!-- Если есть следующая страница, то даём ссылку на неё и на самую последнюю страницу -->
+        {% if page_obj.has_next %}
+          <li><a href="?page={{ page_obj.next_page_number }}&{{ get_copy.urlencode }}"><i class="bi bi-chevron-right"></i></a></li>
+          <li><a href="?page={{ page_obj.paginator.num_pages }}&{{ get_copy.urlencode }}"><i class="bi bi-chevron-double-right"></i></a></li>
+        {% endif %}
+      </ul>
+    </div>
+    
+  {% endif %}
+{% endblock %}
+
+
+{% include 'vacancies/dashboard_sidebar.html' %}
+
+{% comment %} <li>            
+            
+    <!-- The best template code. 
+    <a href="{{ vacancy.get_absolute_url }}">{{ vacancy.title }}</a>  -->
+
+</li> {% endcomment %}

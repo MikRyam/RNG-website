@@ -1,0 +1,112 @@
+{% extends 'vacancies/vacancies_base.html' %}
+{% load  static %}
+
+
+{% block breadcrumbs%}
+    <ol>
+        <li><h5><a href="{% url 'website:home' %}#hero"><i class="bi bi-house-door"></i></a></h5></li>
+        <li>Вакансии</li>
+    </ol>
+    <h2>Вакансии</h2>
+{% endblock %}
+
+{% block content%}
+
+{% if page_obj %}
+
+    
+
+        {% for vacancy in page_obj %}
+
+        <article class="entry">
+
+            <div class="entry-img">
+              <img src="{% static vacancy.get_image %}" alt="" class="img-fluid">
+            </div>
+            
+            <h2 class="entry-title">
+              <a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.title }}</a>
+            </h2>
+            
+            <div class="entry-meta">
+              <ul>
+                <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i><a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.location }}</a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-coin"></i><a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.salary }}</a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-clock"></i><a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}"><time datetime="2020-01-01">{{ vacancy.date_published|date:"M d, Y" }}</time></a></li>                
+              </ul>
+            </div>
+
+            <div class="entry-content">
+              <p>                
+                {{ vacancy.entryСontent|safe }}            
+              </p>
+              <div class="read-more">
+                <a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">Подробнее</a>
+              </div>
+            </div>
+
+        </article><!-- End blog entry -->
+
+        
+
+        {% endfor %}
+
+    
+
+{% else %}
+
+  <article class="entry">
+
+    <h4>Пока нет записей, зайдите позже.</h4>
+
+  </article><!-- End blog entry -->
+
+    
+
+{% endif %}
+
+{% endblock %}
+
+
+{% block pagination %}
+    
+    <div class="blog-pagination">
+      <ul class="justify-content-center">
+        {% if page_obj.has_previous %}
+          <li><a href="?page=1"><i class="bi bi-chevron-double-left"></i></a></li>
+          <li><a href="?page={{ page_obj.previous_page_number }}"><i class="bi bi-chevron-left"></i></a></li>
+        {% endif %}
+
+        <!-- Показываем только текущую страницу и ближайшие к ней, чтобы список не тянулся и не захламлял страницу -->
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+              <li class="active"><a href="#">{{ num }}</a></li>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <li><a href="?page={{ num }}">{{ num }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        <!-- Если есть следующая страница, то даём ссылку на неё и на самую последнюю страницу -->
+        {% if page_obj.has_next %}
+          <li><a href="?page={{ page_obj.next_page_number }}"><i class="bi bi-chevron-right"></i></a></li>
+          <li><a href="?page={{ page_obj.paginator.num_pages }}"><i class="bi bi-chevron-double-right"></i></a></li>
+        {% endif %}
+      </ul>
+    </div>
+    
+{% endblock %}
+
+
+{% block sidebar %}
+
+  {% include 'vacancies/vacancies_list_sidebar.html' %}
+
+{% endblock %}
+
+
+{% comment %} <li>            
+            
+    <!-- The best template code. 
+    <a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.title }}</a>  -->
+
+</li> {% endcomment %}

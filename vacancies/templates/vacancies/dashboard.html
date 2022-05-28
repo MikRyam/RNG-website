@@ -1,0 +1,130 @@
+{% extends 'vacancies/dashboard_base.html' %}
+{% load  static %}
+
+
+{% block breadcrumbs%}
+    <ol>
+        <li><h5><a href="{% url 'vacancies:dashboard' %}"><i class="bi bi-speedometer2"></i></a></h5></li>
+        <li>Вакансии</li>
+    </ol>
+    <h2>Вакансии</h2>
+{% endblock %}
+
+{% block content%}
+
+
+
+{% if all_vacancies_list %} 
+
+<h4>Выбрано вакансий: {{ filter.qs|length }}</h4>
+<br/><br/>
+
+        {% for vacancy in filter.qs %}
+
+          <article class="entry">
+
+              <div class="entry-img">
+                <img src="{% static vacancy.get_image %}" alt="" class="img-fluid">
+              </div>
+
+              <div class="row">
+                <div class="col-md-10">
+                  <h2 class="entry-title">
+                    <a href="{% url 'vacancies:dashboard_detail' vacancy.pk vacancy.slug %}">{{ vacancy.title }}</a>              
+                  </h2>
+                </div>
+                {% if vacancy.is_on_top %}
+                  <div class="col-6 col-md-1">
+                    <h2 class="text-warning"><i class="bi bi-award-fill"></i></h2>
+                  </div>
+                {% endif %}
+                {% if vacancy.is_published %}
+                  <div class="col-6 col-md-1">
+                    <h2 class="text-success"><i class="bi bi-card-text"></i></h2>
+                  </div>
+                {% endif %}
+              </div>                
+              
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i> <a href="{% url 'vacancies:dashboard_detail' vacancy.pk vacancy.slug %}">{{ vacancy.location }}</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-coin"></i> <a href="{% url 'vacancies:dashboard_detail' vacancy.pk vacancy.slug %}">{{ vacancy.salary }}</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{% url 'vacancies:dashboard_detail' vacancy.pk vacancy.slug %}"><time datetime="2020-01-01">{{ vacancy.date_published }}</time></a></li>                
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p>                
+                  {{ vacancy.entryСontent|safe }}            
+                </p>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <a class="btn btn-info" href="{% url 'vacancies:dashboard_detail' vacancy.pk vacancy.slug %}" role="button">Подробнее</a>
+                  <a class="btn btn-warning" href="{% url 'vacancies:dashboard_update' vacancy.pk vacancy.slug %}" role="button">Редактировать</a>
+                  <a class="btn btn-danger" href="{% url 'vacancies:dashboard_delete' vacancy.pk vacancy.slug %}" role="button">Удалить</a>                  
+                  <a class="btn btn-dark" href="{% url 'vacancies:to_publish' vacancy.pk vacancy.slug %}" role="button">Опубликовать<span class="glyphicon glyphicon-ok"></span></a>                
+                </div>             
+
+              </div>            
+
+          </article><!-- End blog entry -->
+
+        {% endfor %}
+        
+        
+
+{% else %}
+
+    <h4>Пока нет записей, зайдите позже.</h4>
+
+{% endif %}
+
+{% endblock %}
+
+
+{% block pagination %}
+
+  {% if is_paginated %}
+
+    <div class="blog-pagination">
+      <ul class="justify-content-center">
+        {% if page_obj.has_previous %}
+          <li><a href="?page=1&{{ get_copy.urlencode }}"><i class="bi bi-chevron-double-left"></i></a></li>
+          <li><a href="?page={{ page_obj.previous_page_number }}&{{ get_copy.urlencode }}"><i class="bi bi-chevron-left"></i></a></li>
+        {% endif %}
+
+        <!-- Показываем только текущую страницу и ближайшие к ней, чтобы список не тянулся и не захламлял страницу -->
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+              <li class="active"><a href="#">{{ num }}</a></li>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <li><a href="?page={{ num }}&{{ get_copy.urlencode }}">{{ num }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        <!-- Если есть следующая страница, то даём ссылку на неё и на самую последнюю страницу -->
+        {% if page_obj.has_next %}
+          <li><a href="?page={{ page_obj.next_page_number }}&{{ get_copy.urlencode }}"><i class="bi bi-chevron-right"></i></a></li>
+          <li><a href="?page={{ page_obj.paginator.num_pages }}&{{ get_copy.urlencode }}"><i class="bi bi-chevron-double-right"></i></a></li>
+        {% endif %}
+      </ul>
+    </div>
+    
+    
+  {% endif %}
+{% endblock %}.
+
+
+{% block sidebar %}
+
+  {% include 'vacancies/dashboard_sidebar.html' %}
+
+  {% endblock %}
+
+
+{% comment %} <li>            
+            
+    <!-- The best template code. 
+    <a href="{{ vacancy.get_absolute_url }}">{{ vacancy.title }}</a>  -->
+
+</li> {% endcomment %}

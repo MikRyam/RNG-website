@@ -1,0 +1,193 @@
+{% extends 'vacancies/dashboard_base.html' %}
+{% load  static %}
+
+
+{% block breadcrumbs%}
+    <ol>
+        <li><h5><a href="{% url 'vacancies:dashboard' %}"><i class="bi bi-speedometer2"></i></a></h5></li>
+        <li><a href="{% url 'vacancies:dashboard' %}">Вакансии</a></li>
+        <li>Вакансия</li>
+    </ol>
+    <h2>Вакансия</h2>
+{% endblock %}
+
+
+{% block content %}
+
+
+    <article class="entry entry-single">
+
+      <div class="entry-img">
+        <img src="{% static vacancy.get_image %}" alt="" class="img-fluid">
+      </div>
+
+      <div class="row">
+        <div class="col-md-10">
+          <h2 class="entry-title">
+            <a href="{% url 'vacancies:dashboard_detail' vacancy.pk vacancy.slug %}">{{ vacancy.title }}</a>              
+          </h2>
+        </div>
+        {% if vacancy.is_on_top %}
+                  <div class="col-6 col-md-1">
+                    <h2 class="text-warning"><i class="bi bi-award-fill"></i></h2>
+                  </div>
+                {% endif %}
+        {% if vacancy.is_published %}
+          <div class="col-6 col-md-1">
+            <h2 class="text-success"><i class="bi bi-card-text"></i></h2>
+          </div>
+        {% endif %}
+      </div>  
+
+      <div class="entry-meta">
+        <ul>
+            <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i> <a href="{{ vacancy.get_absolute_url }}">{{ vacancy.location }}</a></li>
+            <li class="d-flex align-items-center"><i class="bi bi-coin"></i> <a href="{{ vacancy.get_absolute_url }}">{{ vacancy.salary }}</a></li>
+            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ vacancy.get_absolute_url }}"><time datetime="2020-01-01">{{ vacancy.date_published }}</time></a></li>
+        </ul>
+      </div>
+
+      <div class="entry-content">
+        <p>{{ vacancy.entryСontent|safe }}</p>
+        <br/>
+        <p>{{ vacancy.body|safe }}</p>
+      </div>
+
+      <div class="entry-footer">
+        <i class="bi bi-folder"></i>
+        <ul class="cats">
+          <li><a href="#">Business</a></li>
+        </ul>
+
+        <i class="bi bi-tags"></i>
+        <ul class="tags">
+          <li><a href="#">Creative</a></li>
+          <li><a href="#">Tips</a></li>
+          <li><a href="#">Marketing</a></li>
+        </ul>
+      </div>
+      <br/><br/>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">        
+        <a class="btn btn-warning" href="{% url 'vacancies:dashboard_update' vacancy.pk vacancy.slug %}" role="button">Редактировать</a>
+        <a class="btn btn-danger" href="{% url 'vacancies:dashboard_delete' vacancy.pk vacancy.slug %}" role="button">Удалить</a>                  
+        <a class="btn btn-dark" href="{% url 'vacancies:to_publish' vacancy.pk vacancy.slug %}" role="button">Опубликовать<span class="glyphicon glyphicon-ok"></span></a> 
+      </div>    
+
+    </article><!-- End blog entry -->
+    
+  {% if vacancy.contacts %}
+    <div class="blog-author d-flex align-items-center">
+      <img src="{{ user.profile.profile_image.url }}" class="rounded-circle float-left" alt="">
+      <div>
+        <h4>Михаил Рямов</h4>
+        <div class="social-links">
+          <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+          <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+          <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+        </div>
+        <p>
+          Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas.
+        </p>
+      </div>
+    </div><!-- End blog author bio -->
+  {% endif %}
+
+
+  {% if vacancy_applications %} 
+
+  <br/>
+  <hr/>
+  <br/>
+
+    {% comment %} <h4>Сообщений: {{ messages_list|length }}</h4>  {% endcomment %}
+    <h4>Откликов: {{ vacancy_applications_count }}</h4>
+    <br/><br/>
+      
+      {% for application in vacancy_applications %}
+  
+        <article class="entry"> 
+  
+            {% comment %} <div class="row">
+              <div class="col-md-11">
+                <h5>{{ application.vacancy.title }}</h5>
+              </div>                
+              <div class="col-6 col-md-1">
+                <h4 class="text-secondary"><i class="bi bi-file-earmark-person-fill"></i></h4>
+              </div>
+            </div>  {% endcomment %}
+            
+            <h5>{{ application.vacancy.title }}</h5> 
+            
+            <hr/>
+        
+            <h4>
+                {{ application.first_name }}
+                {{ application.last_name }}
+                {% comment %} {{ application.get_fullName }} {% endcomment %}
+            </h4>
+            {% if application.salary %} 
+              <div class="entry-meta">
+                <li class="d-flex align-items-center"><i class="bi bi-cash-coin"></i><a >{{ application.salary }}</a></li>
+              </div>
+            {% endif %}
+        
+            <div class="entry-meta">
+                <ul>
+                    <li class="d-flex align-items-center"><i class="bi bi-envelope"></i><a href="mailto:{{ application.email }}">{{ application.email }}</a></li>  
+                  {% if application.phone %} 
+                    <li class="d-flex align-items-center"><i class="bi bi-telephone"></i><a href="tel:{{ application.phone }}">{{ application.phone }}</a></li>
+                  {% endif %}
+                  {% if application.facebook_url %} 
+                    <li class="d-flex align-items-center"><i class="bi bi-facebook"></i><a>{{ application.facebook_url }}</a></li>
+                  {% endif %}
+                  {% if application.telegram_url %} 
+                    <li class="d-flex align-items-center"><i class="bi bi-telegram"></i><a>{{ application.telegram_url }}</a></li>
+                  {% endif %}
+                  {% if application.whatsapp_url %} 
+                    <li class="d-flex align-items-center"><i class="bi bi-whatsapp"></i><a>{{ application.whatsapp_url }}</a></li>
+                  {% endif %}
+                  {% if application.linkedin_url %} 
+                    <li class="d-flex align-items-center"><i class="bi bi-linkedin"></i><a>{{ application.linkedin_url }}</a></li>
+                  {% endif %}
+                  {% if application.github_url %} 
+                    <li class="d-flex align-items-center"><i class="bi bi-github"></i><a>{{ application.github_url }}</a></li>
+                  {% endif %}
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i><a><time datetime="2020-01-01">{{ application.date_added }}</time></a></li>
+                </ul>
+            </div>                   
+  
+            <div class="entry-content">
+                <p>                
+                {{ application.cover_letter|truncatechars:350 }}            
+                </p>
+            </div>
+            <div class="entry-content">
+              <a href="{{ application.resume.url}}" target="_blank">
+              Резюме
+              </a>
+            </div>
+            <br/>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">                  
+              <a class="btn btn-dark" href="{% url 'vacancies:application_detail' application.pk %}" role="button">Подробнее</a> 
+              <a class="btn btn-danger" href="{% url 'vacancies:application_delete' application.pk %}" role="button">Удалить</a> 
+            </div>  
+                    
+        </article><!-- End blog entry -->
+  
+      {% endfor %}
+          
+          
+  
+  {% else %}
+  
+      <h4>Пока нет откликов.</h4>
+  
+  {% endif %}
+    
+
+{% endblock %}
+
+
+{% include 'vacancies/dashboard_sidebar.html' %}
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application</title>
+</head>
+<body> 
+
+    <article class="entry"> 
+
+        {% comment %} <div class="row">
+          <div class="col-md-11">
+            <h5>{{ application.vacancy.title }}</h5>
+          </div>                
+          <div class="col-6 col-md-1">
+            <h4 class="text-secondary"><i class="bi bi-file-earmark-person-fill"></i></h4>
+          </div>
+        </div>  {% endcomment %}
+        
+        <h5>{{ application.vacancy.title }}</h5> 
+        
+        <hr/>
+    
+        <h4>
+            {{ application.first_name }}
+            {{ application.last_name }}
+            {% comment %} {{ application.get_fullName }} {% endcomment %}
+        </h4>
+        {% if application.salary %} 
+          <div class="entry-meta">
+            <li class="d-flex align-items-center"><i class="bi bi-cash-coin"></i><a >{{ application.salary }}</a></li>
+          </div>
+        {% endif %}
+    
+        <div class="entry-meta">
+            <ul>
+                <li class="d-flex align-items-center"><i class="bi bi-envelope"></i><a href="mailto:{{ application.email }}">{{ application.email }}</a></li>  
+              {% if application.phone %} 
+                <li class="d-flex align-items-center"><i class="bi bi-telephone"></i><a href="tel:{{ application.phone }}">{{ application.phone }}</a></li>
+              {% endif %}
+              {% if application.facebook_url %} 
+                <li class="d-flex align-items-center"><i class="bi bi-facebook"></i><a>{{ application.facebook_url }}</a></li>
+              {% endif %}
+              {% if application.telegram_url %} 
+                <li class="d-flex align-items-center"><i class="bi bi-telegram"></i><a>{{ application.telegram_url }}</a></li>
+              {% endif %}
+              {% if application.whatsapp_url %} 
+                <li class="d-flex align-items-center"><i class="bi bi-whatsapp"></i><a>{{ application.whatsapp_url }}</a></li>
+              {% endif %}
+              {% if application.linkedin_url %} 
+                <li class="d-flex align-items-center"><i class="bi bi-linkedin"></i><a>{{ application.linkedin_url }}</a></li>
+              {% endif %}
+              {% if application.github_url %} 
+                <li class="d-flex align-items-center"><i class="bi bi-github"></i><a>{{ application.github_url }}</a></li>
+              {% endif %}
+                <li class="d-flex align-items-center"><i class="bi bi-clock"></i><a><time datetime="2020-01-01">{{ application.date_added }}</time></a></li>
+            </ul>
+        </div>                   
+
+        <div class="entry-content">
+            <p>                
+            {{ application.cover_letter|truncatechars:350 }}            
+            </p>
+        </div>
+        <div class="entry-content">
+          <a href="{{ application.resume.url}}" target="_blank">
+          Резюме
+          </a>
+        </div>
+        <br/>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">                  
+          <a class="btn btn-dark" href="{% url 'vacancies:application_detail' application.pk %}" role="button">Подробнее</a> 
+          <a class="btn btn-danger" href="{% url 'vacancies:application_delete' application.pk %}" role="button">Удалить</a> 
+        </div>  
+                
+    </article><!-- End blog entry -->
+    
+    
+    
+
+
+
+</body>
+</html>

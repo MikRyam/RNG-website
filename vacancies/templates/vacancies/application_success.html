@@ -1,0 +1,58 @@
+{% extends 'vacancies/vacancies_base.html' %}
+{% load  static %}
+
+
+{% block breadcrumbs%}
+    <ol>
+        <li><h5><a href="{% url 'website:home' %}#hero"><i class="bi bi-house-door"></i></a></h5></li>
+        <li><a href="{% url 'vacancies:vacancies_list' %}">Вакансии</a></li>
+        <li><a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">Вакансия</a></li>
+        <li>Отклик</li>
+    </ol>
+    <h2>Отклик</h2>
+{% endblock %}
+
+
+{% block content %}
+        
+    <article class="entry entry-single">
+
+      <h2 class="entry-title">
+        <a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.title }}</a>
+      </h2>
+
+      <div class="entry-meta">
+        <ul>
+            <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i><a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.location }}</a></li>
+            <li class="d-flex align-items-center"><i class="bi bi-coin"></i> <a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}">{{ vacancy.salary }}</a></li>
+            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{% url 'vacancies:add_application' vacancy.pk vacancy.slug %}"><time datetime="2020-01-01">{{ vacancy.date_published|date:"M d, Y" }}</time></a></li>
+        </ul>
+      </div>
+
+      <hr>
+
+        <br/><br/>
+
+        <div class="section-title">
+            <br/> 
+            <h1><strong><i class="bi bi-check-circle-fill"></i></strong></h1>   
+            <br/>         
+            <h3><span>Спасибо!</span></h3>
+            <h3>Мы получили ваш отклик.</h3>
+            
+            <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+        </div>
+
+        <br/><br/>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <a class="btn btn-secondary" href="{% url 'vacancies:vacancies_list' %}">Остальные Вакансии</a>
+        </div>        
+       
+    </article><!-- End blog entry -->
+
+    
+    
+
+    
+{% endblock %}

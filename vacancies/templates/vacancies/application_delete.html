@@ -1,0 +1,52 @@
+{% extends 'vacancies/dashboard_base.html' %}
+{% load  static %}
+
+{% block title %}Delete Vacancy!{% endblock %}
+
+{% block breadcrumbs%}
+    <ol>
+        <li><h5><a href="{% url 'vacancies:dashboard' %}"><i class="bi bi-speedometer2"></i></a></h5></li>
+        <li><a href="{% url 'vacancies:applications' %}">Отклики</a></li>
+        <li>Удаление Отклика</li>
+    </ol>
+    <h2>Удаление Отклика</h2>
+{% endblock %}
+
+
+{% block content%}
+
+    <article class="entry entry-single">
+
+        {% if user.is_authenticated %}
+            
+            
+                <h1>Удаление Отклика ...</h1>
+                <br/><br/>
+                <h3>Удалить: 
+                    {{ object.first_name }}
+                    {{ object.last_name }}
+                    ({{ object.vacancy.title }})
+                </h3><br/>
+
+                <div class="form-group">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <strong>Are you sure?!</strong><br/><br/>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-danger">Удалить Отклик!</button>
+                        </div>
+                        
+                </div>
+
+            
+
+        {% else %}
+
+        You're not allowed here! (and you know it ...)
+
+        {% endif %}
+
+    </article><!-- End blog entry -->
+
+
+{% endblock %}
