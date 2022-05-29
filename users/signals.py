@@ -20,38 +20,38 @@ def save_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
-@receiver(post_save, sender=User)
-def profile_notify(sender, instance, created, **kwargs):
-    ''' Signal to notify the user about changes of his profile settings '''
-    subject = f'Hello, {instance.username}! Profile settings has been changed on RNG - Dashboard!' 
-    body = f'Hello, {instance.username}! Profile settings on RNG - Dashboard has been changed!' 
-    email = instance.email
+# @receiver(post_save, sender=User)
+# def profile_notify(sender, instance, created, **kwargs):
+#     ''' Signal to notify the user about changes of his profile settings '''
+#     subject = f'Hello, {instance.username}! Profile settings has been changed on RNG - Dashboard!' 
+#     body = f'Hello, {instance.username}! Profile settings on RNG - Dashboard has been changed!' 
+#     email = instance.email
 
-    print("from RNG")
-    print('--------------- \\ --------------')
+#     print("from RNG")
+#     print('--------------- \\ --------------')
 
-    msg = EmailMultiAlternatives(
-        subject=subject,
-        body=body,
-        from_email='subscribecategory@yandex.ru',
-        to=[email]  # это то же, что и recipients_list
-    )
+#     msg = EmailMultiAlternatives(
+#         subject=subject,
+#         body=body,
+#         from_email='subscribecategory@yandex.ru',
+#         to=[email]  # это то же, что и recipients_list
+#     )
     
-    # получаем наш html
-    html_content = render_to_string(
-        'registration/profile_email.html',
-        {
-            'profile': instance.profile,
-            'body': body
-        }
-    )
+#     # получаем наш html
+#     html_content = render_to_string(
+#         'registration/profile_email.html',
+#         {
+#             'profile': instance.profile,
+#             'body': body
+#         }
+#     )
 
-    msg.attach_alternative(html_content, "text/html")  # добавляем html
+#     msg.attach_alternative(html_content, "text/html")  # добавляем html
 
-    msg.send()  # отсылаем
+#     msg.send()  # отсылаем
 
-    print("222")
-    print('-------222-------- \\ -------222-------')
+#     print("222")
+#     print('-------222-------- \\ -------222-------')
 
 
 # @receiver(post_save, sender=Message)

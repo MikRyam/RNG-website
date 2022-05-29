@@ -27,19 +27,10 @@ urlpatterns = [
     path('users/', include('users.urls'))
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+    # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
-"""
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('core.urls')),
-    path('chat/', include('chat.urls')),
-    path('rooms/', include('room.urls')),
-    path('users/', include('django.contrib.auth.urls')),
-    path('users/', include('users.urls')),
-]
-
-"""

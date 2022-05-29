@@ -10,30 +10,30 @@ from .models import JobApplication
 
 
 
-@receiver(post_save, sender=JobApplication)
-def application_notify(sender, instance, created, **kwargs):
-    ''' Signal to notify admins about new job application'''
-    subject = f'Hello, new job application for {instance.vacancy.title}!' 
-    body = f'Hello, new job application for {instance.vacancy.title}!\n\nName: {instance.first_name} {instance.last_name}\nContact email: {instance.email}'
+# @receiver(post_save, sender=JobApplication)
+# def application_notify(sender, instance, created, **kwargs):
+#     ''' Signal to notify admins about new job application'''
+#     subject = f'Hello, new job application for {instance.vacancy.title}!' 
+#     body = f'Hello, new job application for {instance.vacancy.title}!\n\nName: {instance.first_name} {instance.last_name}\nContact email: {instance.email}'
     
-    print("Starts sending email-application from RNG site")
-    print(subject)
-    print('--------------- \\ --------------')
+#     print("Starts sending email-application from RNG site")
+#     print(subject)
+#     print('--------------- \\ --------------')
 
-    try:         
-        send_mail( 
-            subject=subject,
-            message=body,
-            from_email=config('from_email'), # здесь указываете почту, с которой будете отправлять        
-            recipient_list=[config('recipient_1'), config('recipient_2'), config('recipient_4'), config('recipient_4')]  # здесь список получателей. Например, секретарь, сам врач и т. д.
-        )
-    except smtplib.SMTPDataError:
-        print("Something went wrong")
-        print("------  500  -------")
-        pass  # ignore email errors 
-    else:
-        print("Status code: 200 or 302")
-        print('-------200-------- \\ -------302-------')
+#     try:         
+#         send_mail( 
+#             subject=subject,
+#             message=body,
+#             from_email=config('from_email'), # здесь указываете почту, с которой будете отправлять        
+#             recipient_list=[config('recipient_1'), config('recipient_2'), config('recipient_4'), config('recipient_4')]  # здесь список получателей. Например, секретарь, сам врач и т. д.
+#         )
+#     except smtplib.SMTPDataError:
+#         print("Something went wrong")
+#         print("------  500  -------")
+#         pass  # ignore email errors 
+#     else:
+#         print("Status code: 200 or 302")
+#         print('-------200-------- \\ -------302-------')
 
 
 
@@ -59,8 +59,8 @@ def application_notify(sender, instance, created, **kwargs):
 
     # msg.send()  # отсылаем
 
-    print(subject)
-    print('-----200------ \\ ------200-----')
+    # print(subject)
+    # print('-----200------ \\ ------200-----')
 
 
 # @receiver(post_save, sender=Message)
