@@ -30,7 +30,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 # DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1']  # You must set settings.ALLOWED_HOSTS if DEBUG is False.
+ALLOWED_HOSTS = ['rng.pythonanywhere.com', '127.0.0.1', ]  # You must set settings.ALLOWED_HOSTS if DEBUG is False.
 
 LOGOUT_REDIRECT_URL = '/users/login/'
 # LOGIN_REDIRECT_URL = '/vacancies/'
