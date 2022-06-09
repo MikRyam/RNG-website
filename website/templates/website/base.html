@@ -40,6 +40,13 @@
     .hidden {
       display:none;
     }
+    
+    textarea {
+      width: 90%; /* Ширина поля в процентах */
+      height: 200px; /* Высота поля в пикселах */
+      resize: none; /* Запрещаем изменять размер */
+    } 
+     
   </style>
 
 </head>
@@ -52,10 +59,10 @@
   <section id="hero">
     {% comment %} <img src="{% static 'website/assets/img/hero-bg-code4.jpg' %}" class="img-fluid" alt=""> {% endcomment %}
     <div class="hero-container">
-      <h3>Welcome to <strong>RNG</strong></h3>
-      <h1>We're Recruiting Agency</h1>
-      <h2>We are team of experienced recruiters making our clients happy with new talents</h2>
-      <a href="#about" class="btn-get-started scrollto">Get Started</a>
+      <h3>Добро пожаловать в <strong> RNG</strong></h3>
+      <h1>Мы рекрутинговое агентство</h1>
+      <h2>Делаем наших клиентов счастливыми, привлекая им новые таланты</h2>
+      <a href="#about" class="btn-get-started scrollto">Начать</a>
     </div>
   </section><!-- End Hero -->
 
@@ -66,7 +73,7 @@
         <div class="container">
 
             <div class="section-title">
-                <h2>About</h2>
+                <h2>О нас</h2>
                 <h3>Learn More <span>About Us</span></h3>
                 <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
             </div>
@@ -83,9 +90,9 @@
                     magna aliqua.
                 </p>
                 <ul>
-                    <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                    <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                    <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperd</li>
+                    <li><i class="bi bi-check-circle"></i> Больше 15 лет подбираем IT-специалистов и инженеров по всей России.</li>
+                    <li><i class="bi bi-check-circle"></i> Основной наш ресурс – это команда опытных консультантов, совокупный опыт которых позволяет оперативно решать любые задачи подбора персонала.</li>
+                    <li><i class="bi bi-check-circle"></i> Более 300 закрытых вакансий за 2021 год.</li>
                 </ul>
                 <p>
                     Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate tera noden carma palorp mades tera.
@@ -102,44 +109,82 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Services</h2>
-          <h3>We do offer awesome <span>Services</span></h3>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+          <h2>Услуги</h2>
+          <h3>Мы предлагаем услуги по <span>Подбору персонала</span></h3>
+          <p>Сферы и компетенции закрываемых вакансий:</p>
         </div>
 
         <div class="row">
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title"><a href="">Подбор разработчиков</a></h4>
-              <p class="description">Frontend, Backend, Архитекторы, DevOps, Тестировщики</p>
+              <div class="icon"><i class="bi bi-github"></i></div>
+              <h4 class="title"><a href="">Разработка ПО</a></h4>
+              <p class="description">Back-End, Front-End, Mobile, Architect, GameDev.</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title"><a href="">Подбор аналитиков</a></h4>
-              <p class="description">Аналитики, Web-аналитики, Data Analyst, Data Science</p>
+              <h4 class="title"><a href="">Data</a></h4>
+              <p class="description">Data Analyst, Data Scientists, Администратор базы данных, BI, бизнес аналитики, системные аналитики.</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4 class="title"><a href="">Подбор IT admin</a></h4>
-              <p class="description">Project admin, Project manager, Product manager, Release manager</p>
+              <h4 class="title"><a href="">Менеджмент</a></h4>
+              <p class="description">Руководители проектов, тим лиды, Product менеджеры, Release менеджеры.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-life-preserver"></i></div>
+              <h4 class="title"><a href="">Системное администрирование</a></h4>
+              <p class="description">DevOps, системные администраторы, helpdesk, руководители инфраструктуры.</p>
+            </div>
+          </div>
+          
+        </div>
+
+        <br/><br/>
+
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              {% comment %} bx bxl-dribbble {% endcomment %}
+              <div class="icon"><i class="bi bi-layout-wtf"></i></div> 
+              <h4 class="title"><a href="">Дизайн, UI/UX</a></h4>
+              <p class="description">UI/UX дизайнер, VR дизайнер, VFX дизайнер, Game дизайнер.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-file-check"></i></div>
+              <h4 class="title"><a href="">Управление качеством</a></h4>
+              <p class="description">QA lead, QA engineer, ручное и автоматизированное тестирование.</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-world"></i></div>
-              <h4 class="title"><a href="">Sourcing</a></h4>
-              <p class="description">Сорсинг кандидатов, предоставленние списков подходящих кандидатов</p>
+              <h4 class="title"><a href="">Интернет-маркетинг</a></h4>
+              <p class="description">SEO, ASO, PPC / СPA / CPC, SMM, web-аналитики.</p>
             </div>
           </div>
 
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-diagram-3"></i></div>
+              <h4 class="title"><a href="">C-level</a></h4>
+              <p class="description">CIO, CTO, CEO, CMO, CCO, HR Director etc.</p>
+            </div>
+          </div>
+          
         </div>
 
       </div>
@@ -153,9 +198,9 @@
       <div class="container">
         
         <div class="text-center">
-          <h3>Call To Action</h3>
-          <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <a class="cta-btn" href="#">Call To Action</a>
+          <h3>Оставить Заявку на Подбор</h3>
+          <p> Есть вопросы? Хотите обсудить ваш проект? Пожалуйста, свяжитесь с нами.</p>
+          <a class="cta-btn" href="#contact">Заказать Подбор</a>
         </div>
 
       </div>
@@ -167,7 +212,7 @@
         <div class="container">
   
           <div class="section-title" data-aos="fade-up">
-            <h2>Clients</h2>
+            <h2>Клиенты</h2>
             <p>Magnam dolores commodi suscipit. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
           </div>
   
@@ -175,49 +220,49 @@
   
             <div class="col-lg-3 col-md-4 col-xs-6">
               <div class="client-logo" data-aos="zoom-in">
-                <img src="{% static 'website/assets/img/clients/client-1.png' %}" class="img-fluid" alt="">
+                <img src="{% static 'website/assets/img/clients/client-11.png' %}" class="img-fluid" alt="">
               </div>
             </div>
   
             <div class="col-lg-3 col-md-4 col-xs-6">
               <div class="client-logo" data-aos="zoom-in" data-aos-delay="100">
-                <img src="{% static 'website/assets/img/clients/client-2.png' %}" class="img-fluid" alt="">
+                <img src="{% static 'website/assets/img/clients/client-12.png' %}" class="img-fluid" alt="">
               </div>
             </div>
   
             <div class="col-lg-3 col-md-4 col-xs-6">
               <div class="client-logo" data-aos="zoom-in" data-aos-delay="150">
-                <img src="{% static 'website/assets/img/clients/client-3.png' %}" class="img-fluid" alt="">
+                <img src="{% static 'website/assets/img/clients/client-13.png' %}" class="img-fluid" alt="">
               </div>
             </div>
   
             <div class="col-lg-3 col-md-4 col-xs-6">
               <div class="client-logo" data-aos="zoom-in" data-aos-delay="200">
-                <img src="{% static 'website/assets/img/clients/client-4.png' %}" class="img-fluid" alt="">
+                <img src="{% static 'website/assets/img/clients/client-14.png' %}" class="img-fluid" alt="">
               </div>
             </div>
   
             <div class="col-lg-3 col-md-4 col-xs-6">
               <div class="client-logo" data-aos="zoom-in" data-aos-delay="250">
-                <img src="{% static 'website/assets/img/clients/client-5.png' %}" class="img-fluid" alt="">
+                <img src="{% static 'website/assets/img/clients/client-2.png' %}" class="img-fluid" alt="">
               </div>
             </div>
   
             <div class="col-lg-3 col-md-4 col-xs-6">
               <div class="client-logo" data-aos="zoom-in" data-aos-delay="300">
-                <img src="{% static 'website/assets/img/clients/client-6.png' %}" class="img-fluid" alt="">
+                <img src="{% static 'website/assets/img/clients/client-16.png' %}" class="img-fluid" alt="">
               </div>
             </div>
   
             <div class="col-lg-3 col-md-4 col-xs-6">
               <div class="client-logo" data-aos="zoom-in" data-aos-delay="350">
-                <img src="{% static 'website/assets/img/clients/client-7.png' %}" class="img-fluid" alt="">
+                <img src="{% static 'website/assets/img/clients/client-17.png' %}" class="img-fluid" alt="">
               </div>
             </div>
   
             <div class="col-lg-3 col-md-4 col-xs-6" data-aos="zoom-in" data-aos-delay="400">
               <div class="client-logo">
-                <img src="{% static 'website/assets/img/clients/client-8.png' %}" class="img-fluid" alt="">
+                <img src="{% static 'website/assets/img/clients/client-18.png' %}" class="img-fluid" alt="">
               </div>
             </div>
   
@@ -238,8 +283,8 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Team</h2>
-          <h3>Our Hardworking <span>Team</span></h3>
+          <h2>Команда</h2>
+          <h3>Наша опытная <span>Команда</span></h3>
           <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
         </div>
 
@@ -328,7 +373,7 @@
     
             <div class="section-title">
               <h2>F.A.Q</h2>
-              <h3>Frequently Asked <span>Questions</span></h3>
+              <h3>Часто задаваемые <span>Вопросы</span></h3>
             </div>
     
             <ul class="faq-list">
@@ -397,36 +442,31 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Contact</h2>
-          <h3>Contact <span>Us</span></h3>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
-        </div>
-
-        <div>
-          <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3775.4652595630396!2d37.633769371416825!3d55.7601511792652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a5fca11dad1%3A0x986302aba1e2b04!2z0JDRgNC80Y_QvdGB0LrQuNC5INC_0LXRgC4sIDksINGBMSwg0JzQvtGB0LrQstCwLCAxMDEwMDA!5e0!3m2!1sru!2sru!4v1653073135045!5m2!1sru!2sru" frameborder="0" allowfullscreen></iframe>
+          <h2>Контакты</h2>
+          <h3>Свяжитесь с <span>Нами</span></h3>
+          <p>Есть вопросы? Хотите обсудить ваш проект? Пожалуйста, свяжитесь с нами.</p>
         </div>
 
         
-
         <div class="row mt-5">
 
           <div class="col-lg-4">
             <div class="info">
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
+                <h4>Адрес:</h4>
                 <p>Армянский пер., 9, с1, Москва, 101990</p>
               </div>
 
               <div class="email footer-links">
-                <i class="bi bi-envelope"></i>
+                <a id="email" class="mail" href="mailto:info@rng-services.com"><i class="bi bi-envelope"></i></a>
                 <h4>Email:</h4>
                 <p><a id="email" class="mail" href="mailto:info@rng-services.com">info@rng-services.com</a></p>
               </div>
 
               <div class="phone ">
-                <i class="bi bi-phone"></i>
-                <h4>Call:</h4>                
+                <a href="tel:+74951360310"><i class="bi bi-phone"></i></a>
+                <h4>Телефон:</h4>                
                   <p><a href="tel:+74951360310">+7 495 136 03 10</a></p>                
               </div>  
               
@@ -455,7 +495,7 @@
               <div class="row">
                 <div class="col-md-6 form-group">                  
                   {% comment %} {{ message_form.name }} {% endcomment %}
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Имя Фамилия*" required>                  
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Имя*" required>                  
                   <div class="error text-danger"></div>               
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
@@ -501,6 +541,13 @@
           </div>
 
         </div>
+
+        <br/><br/><br/><br/>
+
+        <div>
+          <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3775.4652595630396!2d37.633769371416825!3d55.7601511792652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a5fca11dad1%3A0x986302aba1e2b04!2z0JDRgNC80Y_QvdGB0LrQuNC5INC_0LXRgC4sIDksINGBMSwg0JzQvtGB0LrQstCwLCAxMDEwMDA!5e0!3m2!1sru!2sru!4v1653073135045!5m2!1sru!2sru" frameborder="0" allowfullscreen></iframe>
+        </div>
+
       </div>
     </section><!-- End Contact Section -->
 

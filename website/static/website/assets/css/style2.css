@@ -109,3 +109,12 @@
   text-decoration: none;
 }
 
+
+
+textarea {
+  resize: none; /* Запрещаем изменять размер */
+}
+
+#textarea {
+  resize: none; /* Запрещаем изменять размер */
+}
