@@ -28,17 +28,15 @@
                     </h5>
                 
                     <div class="entry-meta">
-                        <ul>                  
+                        <ul>
+                            <li class="d-flex align-items-center"><i class="bi bi-telephone"></i><a href="mailto:{{ message.phone }}">{{ message.phone }}</a></li>                  
                             <li class="d-flex align-items-center"><i class="bi bi-envelope"></i><a href="mailto:{{ message.email }}">{{ message.email }}</a></li>
                             <li class="d-flex align-items-center"><i class="bi bi-clock"></i><a><time datetime="2020-01-01">{{ message.date }}</time></a></li>
                             <li class="d-flex align-items-center"><i class="bi bi-upc"></i><a>id: #{{ message.id }}</a></li>
                         </ul>
                     </div>
 
-                    <h4>
-                        <a>{{ message.subject }}</a>              
-                    </h4>
-
+                    
                     <div class="entry-content">
                         <p>                
                         {{ message.message }}            
