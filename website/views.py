@@ -61,7 +61,3 @@ def home(request):
 
     # context_dict = {'projects': projects, 'form': form, 'blog_1': blog_1, 'blog_2': blog_2, 'blog_3': blog_3} 
     # return render(request, 'portfolio/home.html', context_dict)
-
-
-def about(request):
-    return render(request, 'website/about.html', {})

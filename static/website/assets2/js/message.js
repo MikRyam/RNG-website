@@ -3,8 +3,8 @@ let id = (id) => document.getElementById(id);
 let classes = (classes) => document.getElementsByClassName(classes);
 
 let username = id("name"),
-  email = id("email-form"),
-  text_message = id("textarea"),
+  phone = id("phone"),
+  email = id("email-form"),  
   form = id("message-form"),
   
   errorMsg = classes("error"),
@@ -43,14 +43,14 @@ document.addEventListener("DOMContentLoaded", function(){
     // btn.addEventListener("click", async function(event){
     form.addEventListener("submit", async function(event) {        
         event.preventDefault();
-        if (username.value.trim() === "" || email.value.trim() === "" || text_message.value.trim() === "") {
+        if (username.value.trim() === "" || phone.value.trim() === "" || email.value.trim() === "") {
             engine(username, 0, "Поле Имя не может быть пустым") &
-            engine(email, 1, "Поле Email не может быть пустым") &
-            engine(text_message, 2, "Поле Текст сообщения не может быть пустым")
+            engine(phone, 1, "Поле Телефон не может быть пустым") &
+            engine(email, 2, "Поле Email не может быть пустым")
         } else {
             engine(username, 0, "");
-            engine(email, 1, "");
-            engine(text_message, 2, "");
+            engine(phone, 1, "");
+            engine(email, 2, "");
             toggleLoader()        
             console.log("Helllllooooo!!!");
             let response = await fetch("/", {

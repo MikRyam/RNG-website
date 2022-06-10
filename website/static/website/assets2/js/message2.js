@@ -1,16 +1,36 @@
+// import IMask from 'imask';
+
+// let element = document.getElementById('phone');
+// let maskOptions = {
+//     mask: '+{7}(000)000-00-00',
+//     lazy: false
+// };
+// let mask = IMask(element, maskOptions);
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const element = document.getElementById('phone'); // ищем наш единственный input
+    const maskOptions = { // создаем объект параметров
+      mask: '+{7}(000)000-00-00' // задаем единственный параметр mask
+    }
+    IMask(element, maskOptions) // запускаем плагин с переданными параметрами
+  
+  })
+
 let id = (id) => document.getElementById(id);
 
 let classes = (classes) => document.getElementsByClassName(classes);
 
 let username = id("name"),
-  email = id("email-form"),
-  text_message = id("textarea"),
+  phone = id("phone"),
+  email = id("email-form"),  
   form = id("message-form"),
   
   errorMsg = classes("error"),
   successIcon = classes("success-icon"),
   failureIcon = classes("failure-icon");
 
+let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
 let engine = (id, serial, message) => {
 
@@ -22,6 +42,28 @@ else {
     errorMsg[serial].innerHTML = "";
 }
 }
+
+let engineMail = (id, serial, message) => {
+
+    if (reg.test(email.value.trim()) == false) {
+        errorMsg[serial].innerHTML = message;
+    } 
+    
+    else {
+        errorMsg[serial].innerHTML = "";
+    }
+    }
+
+let enginePhone = (id, serial, message) => {
+
+    if (phone.value.length < 16) {
+        errorMsg[serial].innerHTML = message;
+    } 
+    
+    else {
+        errorMsg[serial].innerHTML = "";
+    }
+    }
 
 // form.addEventListener("submit", (e) => {
 //     e.preventDefault();
@@ -43,14 +85,18 @@ document.addEventListener("DOMContentLoaded", function(){
     // btn.addEventListener("click", async function(event){
     form.addEventListener("submit", async function(event) {        
         event.preventDefault();
-        if (username.value.trim() === "" || email.value.trim() === "" || text_message.value.trim() === "") {
+        if (username.value.trim() === "" || phone.value.trim() === "" || email.value.trim() === "") {
             engine(username, 0, "Поле Имя не может быть пустым") &
-            engine(email, 1, "Поле Email не может быть пустым") &
-            engine(text_message, 2, "Поле Текст сообщения не может быть пустым")
+            engine(phone, 1, "Поле Телефон не может быть пустым") &
+            engine(email, 2, "Поле Email не может быть пустым")            
+        } else if (reg.test(email.value.trim()) == false) {
+            engineMail(email, 2, "Введите корректный e-mail")
+        } else if (phone.value.length < 16) {
+            enginePhone(phone, 1, "Слишком короткое значение")
         } else {
             engine(username, 0, "");
-            engine(email, 1, "");
-            engine(text_message, 2, "");
+            engine(phone, 1, "");
+            engine(email, 2, "");
             toggleLoader()        
             console.log("Helllllooooo!!!");
             let response = await fetch("/", {
@@ -86,3 +132,5 @@ document.addEventListener("DOMContentLoaded", function(){
     //   console.log(response_json);
     })
   })
+
+

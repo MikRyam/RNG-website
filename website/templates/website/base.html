@@ -464,7 +464,6 @@
           <h3>Свяжитесь с <span>Нами</span></h3>
           <p>Есть вопросы? Хотите обсудить ваш проект? Пожалуйста, свяжитесь с нами.</p>
         </div>
-
         
         <div class="row mt-5">
 
@@ -509,11 +508,18 @@
           <div class="col-lg-8 mt-5 mt-lg-0">
             <form id="message-form" action="" method="POST">
             {% comment %} <form action="#contact" id="message-form" method="post" role="form" class="email-form"> {% endcomment %}
-              {% csrf_token %}              
-              <div class="row">
+              {% csrf_token %} 
+
+              <div class="col-md-12 form-group">
+                {% comment %} {{ message_form.name }} {% endcomment %}
+                <input type="text" name="name" class="form-control" id="name" placeholder="Ваше имя*" required>
+                <div class="error text-danger"></div>  
+              </div> 
+
+              <div class="row mt-3">
                 <div class="col-md-6 form-group">                  
                   {% comment %} {{ message_form.name }} {% endcomment %}
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Имя*" required>                  
+                  <input type="text" name="phone" class="form-control" id="phone" placeholder="Ваш телефон*" required>                  
                   <div class="error text-danger"></div>               
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
@@ -522,15 +528,10 @@
                   <div class="error text-danger"></div>                     
                 </div>
               </div>
-              <div class="form-group mt-3">
-                {% comment %} {{ message_form.subject }} {% endcomment %}
-                <input type="text" class="form-control" name="subject" placeholder="Тема сообщения">
-                
-              </div>
+              
               <div class="form-group mt-3">
                 {% comment %} {{ message_form.message }} {% endcomment %}
-                <textarea class="form-control" name="message" rows="5" id="textarea" placeholder="Текст сообщения*" required></textarea>                  
-                <div class="error text-danger"></div>
+                <textarea class="form-control" name="message" rows="5" id="textarea" placeholder="Текст сообщения"></textarea>
               </div>
               {% comment %} <div class="my-3">
                 <div class="loading">Loading</div>
@@ -588,9 +589,10 @@
 
   <!-- Template Main JS File -->
   {% comment %} <script src="{% static 'website/assets/js/main.js' %}"></script> {% endcomment %}
+  <script src="https://unpkg.com/imask"></script>
   <script src="{% static 'website/assets2/js/main.js' %}"></script>
-  <script src="{% static 'website/assets2/js/message.js' %}"></script>
-
+  <script src="{% static 'website/assets2/js/message2.js' %}"></script>
+  
 
 </body>
 
