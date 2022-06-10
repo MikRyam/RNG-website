@@ -11,17 +11,17 @@
               Армянский пер., 9, с1<br>
               Москва, 101990<br>
               Россия<br><br>
-              <strong>Телефон:</strong> +7 495 136 03 10<br>
-              <strong>Email:</strong> info@rng-services.com<br>
+              <strong>Телефон:</strong> <a href="tel:+74951360310">+7 495 136 03 10</a><br>
+              <strong>Email:</strong> <a id="email" class="mail" href="mailto:info@rng-services.com">info@rng-services.com</a><br>
             </p>
           </div>
 
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Полезные ссылки</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#home">Главная</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#about">О нас</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#home">Главная</a></li>              
               <li><i class="bx bx-chevron-right"></i> <a href="#services">Услуги</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'vacancies:vacancies_list' %}">Вакансии</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Политика конфиденциальности</a></li>
             </ul>
           </div>
@@ -29,16 +29,16 @@
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Наши услуги</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Подбор персонала</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Сорсинг кандидатов</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Карьерное консультирование</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Обзор заработных плат</a></li>              
+              <li><i class="bx bx-chevron-right"></i> <a>Подбор персонала</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a>Сорсинг кандидатов</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a>Карьерное консультирование</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a>Обзор заработных плат</a></li>              
             </ul>
           </div>
 
           <div class="col-lg-4 col-md-6 footer-newsletter">
             <h4>Подписаться на рассылку новых вакансий</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <p></p>
             {% comment %} <form action="" method="post"> {% endcomment %}
             <form>
               <input type="email" name="email"><input type="submit" value="Подписаться">
