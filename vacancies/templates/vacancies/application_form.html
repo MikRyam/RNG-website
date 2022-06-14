@@ -62,8 +62,9 @@
         {% comment %} <h4>Михаил Рямов</h4> {% endcomment %}
         <p>{{ vacancy.author.profile.position }}</p>
         <div class="social-links">
-          <a href="{{ vacancy.author.profile.telegram_url }}"><i class="bi bi-telegram"></i></a>
-          <a href="mailto:{{ vacancy.author.email }}"><i class="bi bi-envelope"></i></a>
+          <a href="{{ vacancy.author.profile.telegram_url }}" target="_blank"><i class="bi bi-telegram"></i></a>
+          <a href="{{ vacancy.author.profile.whatsapp_url }}" target="_blank"><i class="bi bi-whatsapp"></i></a>
+          <a href="mailto:{{ vacancy.author.email }}" target="_blank"><i class="bi bi-envelope"></i></a>
           <a href="{{ vacancy.author.profile.linkedin_url }}" target="_blank"><i class="bx bxl-linkedin"></i></a>          
         </div>        
         <p>

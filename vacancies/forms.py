@@ -48,7 +48,7 @@ class JobApplicationForm(ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя*', 'required': 'True'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Фамилия*', 'required': 'True'}),
             'email': forms.TextInput(attrs={'class': 'form-control', 'type': "email", 'placeholder': 'Email*', 'required': 'True'}), 
-            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Телефон'}), 
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Телефон*', 'required': 'True'}), 
             'telegram_url': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Telegram'}), 
             'whatsapp_url': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Whatsapp'}),
             'linkedin_url': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Профиль LinkedIn URL'}), 
